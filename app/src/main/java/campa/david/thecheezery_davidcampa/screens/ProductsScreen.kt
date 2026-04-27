@@ -28,10 +28,10 @@ import campa.david.thecheezery_davidcampa.domain.Product
 import campa.david.thecheezery_davidcampa.viewModel.ProductViewModel
 
 @Composable
-fun ShowProducts(viewModel: ProductViewModel){
+fun ShowProducts(viewModel: ProductViewModel, title: String){
 
-    Column {
-        Text(text = "Products")
+    Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp)) {
+        Text(text = title, style = MaterialTheme.typography.headlineSmall)
         LazyColumn(verticalArrangement = Arrangement.spacedBy(space = 12.dp)) {
             items(items = viewModel.productsListState){ product ->
 
@@ -44,11 +44,12 @@ fun ShowProducts(viewModel: ProductViewModel){
 
 @Composable
 fun ProductItem(product: Product){
-    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
+    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
         Image(painter = painterResource(id = R.drawable.muffin), contentDescription = "muffin")
         Column(modifier = Modifier.fillMaxWidth(fraction = 0.7f)){
-            Text(text = "${product.name}")
-            Text(text = "${product.description}")
+            Text(text = product.name)
+            Text(text = product.description.orEmpty())
+            Text(text = product.type.label, style = MaterialTheme.typography.labelMedium)
         }
         Text(text = "$${product.price}")
     }

@@ -37,8 +37,8 @@ val menuItems = listOf(
     MenuCategory("Cold drinks",      firstGradient),
     MenuCategory("Salties",          secondGradient),
     MenuCategory("Sweets",           secondGradient),
-    MenuCategory("Combos",           thirdGradient),
-    MenuCategory("Add new product",  thirdGradient)
+    MenuCategory("Add new product",  thirdGradient),
+    MenuCategory("Add combo",        thirdGradient)
 )
 
 @Composable
@@ -80,6 +80,9 @@ fun CheezeryMenuScreen(onCategoryClick: (String) -> Unit = {}) {
                             modifier = Modifier.weight(1f),
                             onClick  = { onCategoryClick(item.label) }
                         )
+                    }
+                    if (rowItems.size == 1) {
+                        Spacer(modifier = Modifier.weight(1f))
                     }
                 }
             }
