@@ -7,8 +7,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import campa.david.thecheezery_davidcampa.data.DatabaseHelper
-import campa.david.thecheezery_davidcampa.data.ProductDAO
 import campa.david.thecheezery_davidcampa.domain.Product
 import campa.david.thecheezery_davidcampa.domain.ProductType
 import kotlinx.coroutines.launch
