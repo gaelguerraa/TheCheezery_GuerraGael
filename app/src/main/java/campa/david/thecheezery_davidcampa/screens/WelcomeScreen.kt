@@ -57,7 +57,7 @@ fun CheezeryWelcomeScreen(onGetStarted: () -> Unit = {}) {
             contentAlignment = Alignment.Center
         ) {
             Image(
-                painter = painterResource(id = R.drawable.thecheezery),
+                painter = painterResource(id = R.drawable.theCheezery),
                 contentDescription = "The Cheezery neon sign",
                 modifier = Modifier.fillMaxSize(),
                 contentScale = ContentScale.Crop

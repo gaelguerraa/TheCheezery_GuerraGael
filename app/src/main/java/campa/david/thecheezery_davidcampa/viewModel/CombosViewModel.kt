@@ -7,10 +7,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import campa.david.thecheezery_davidcampa.data.repository.CheezeryRepository
 import campa.david.thecheezery_davidcampa.domain.Combo
+import kotlinx.coroutines.launch
 
 class CombosViewModel(
-    private val combosDAO: CombosDAO,
+    private val repository: CheezeryRepository,
     private val context: Context,
 ) : ViewModel() {
 
@@ -22,16 +25,21 @@ class CombosViewModel(
     }
 
     fun saveCombo(name: String, price: Float, productIds: List<Int>) {
-        val comboId = combosDAO.insertCombo(name, price, productIds)
-        if (comboId != -1L) {
-            Toast.makeText(context, "Combo guardado", Toast.LENGTH_SHORT).show()
-            getAllCombos()
-        } else {
-            Toast.makeText(context, "Hubo un error al guardar combo", Toast.LENGTH_SHORT).show()
+        viewModelScope.launch {
+            val comboId = repository.insertCombo(name, price, productIds)
+            if (comboId != -1L) {
+                Toast.makeText(context, "Combo guardado", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(context, "Hubo un error al guardar combo", Toast.LENGTH_SHORT).show()
+            }
+        } }
+
+        fun getAllCombos() {
+            viewModelScope.launch {
+                repository.getAllCombos().collect { combos ->
+                    combosState = combos
+                }
+            }
         }
     }
 
-    fun getAllCombos() {
-        combosState = combosDAO.getAllCombos()
-    }
-}

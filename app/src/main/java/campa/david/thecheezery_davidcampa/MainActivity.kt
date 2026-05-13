@@ -53,9 +53,9 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun CheezeryApp() {
     val context = LocalContext.current
-    val dbHelper = remember { DatabaseHelper(context) }
-    val productViewModel = remember { ProductViewModel(ProductDAO(dbHelper), context) }
-    val combosViewModel = remember { CombosViewModel(CombosDAO(dbHelper), context) }
+    val repository = remember { CheezeryRepository(AppDatabase.getInstance(context)) }
+    val productViewModel = remember { ProductViewModel(repository, context) }
+    val combosViewModel = remember { CombosViewModel(repository, context) }
     var currentScreen by remember { mutableStateOf(AppScreen.WELCOME) }
     var productsTitle by remember { mutableStateOf("Products") }
 
